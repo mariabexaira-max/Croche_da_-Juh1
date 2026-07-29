@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crochê da Juh - Ateliê Artesanal</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #fffafb;
+      --bg-card: #ffffff;
+      --rosa-soft: #fdeef2;
+      --rosa-accent: #f8c8d4;
+      --primary-color: #8c5260;
+      --text-dark: #4a3e42;
+      --text-muted: #9e8a90;
+      --border-color: #f7e2e7;
+      --font-title: 'Comfortaa', cursive;
+      --font-body: 'Quicksand', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-dark);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    h1, h2, h3, h4, h5, .brand-text {
+      font-family: var(--font-title);
+      color: var(--primary-color);
+    }
+
+    /* Header & Logo */
+    .top-bar {
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 1030;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-container {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid var(--rosa-accent);
+      box-shadow: 0 3px 10px rgba(248, 200, 212, 0.4);
+      overflow: hidden;
+      background-color: var(--rosa-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .logo-fallback {
+      font-family: var(--font-title);
+      font-weight: 700;
+      color: var(--primary-color);
+      font-size: 1.1rem;
+    }
+
+    .brand-text {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .search-container {
+      position: relative;
+      flex-grow: 1;
+      max-width: 280px;
+    }
+
+    .search-input {
+      border-radius: 25px;
+      background-color: var(--rosa-soft);
+      border: 1px solid var(--border-color);
+      padding: 8px 16px 8px 38px;
+      font-size: 0.85rem;
+    }
+
+    .search-input:focus {
+      background-color: #fff;
+      border-color: var(--rosa-accent);
+      box-shadow: 0 0 0 3px rgba(248, 200, 212, 0.3);
+    }
+
+    .search-container .bi-search {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .cart-btn {
+      color: var(--primary-color);
+      background-color: var(--rosa-soft);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Categorias */
+    .nav-categories {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .nav-categories::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-categories .nav-link {
+      color: var(--text-muted);
+      border-radius: 25px;
+      padding: 8px 22px;
+      margin-right: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      background-color: #fff;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s;
+    }
+
+    .nav-categories .nav-link.active {
+      background-color: var(--rosa-accent) !important;
+      color: var(--primary-color) !important;
+      border-color: var(--rosa-accent);
+    }
+
+    /* Carrossel */
+    .hero-carousel {
+      border-radius: 28px;
+      background: linear-gradient(135deg, #ffffff 0%, var(--rosa-soft) 100%);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(248, 200, 212, 0.25);
+    }
+
+    .carousel-item-content {
+      padding: 40px 50px;
+      min-height: 460px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-tag {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--primary-color);
+      font-weight: 700;
+      background-color: #fff;
+      padding: 6px 16px;
+      border-radius: 20px;
+      display: inline-block;
+      border: 1px solid var(--border-color);
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 15px;
+      color: var(--primary-color);
+    }
+
+    .btn-rosa {
+      background-color: var(--rosa-accent);
+      color: var(--primary-color);
+      border-radius: 30px;
+      padding: 12px 30px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: none;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 6px 16px rgba(248, 200, 212, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .btn-rosa:hover {
+      background-color: var(--primary-color);
+      color: #fff;
+    }
+
+    .carousel-img-wrapper {
+      width: 100%;
+      height: 380px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(140, 82, 96, 0.12);
+      border: 3px solid #ffffff;
+    }
+
+    .carousel-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+/* CONTAINER DA FOTO COM MÁXIMA VISIBILIDADE */
+.product-img-container {
+  width: 100%;
+  height: 340px; /* Foto grande e bem destacada */
+  background-color: var(--rosa-soft);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  position: relative;
+  box-shadow: inset 0 0 0 1px var(--border-color);
+}
+
+.product-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+/* ÁREA DE CORES EM DESTAQUE (MUITO MAIS VISÍVEL) */
+.color-swatches-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--rosa-soft);
+  padding: 10px 14px;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  margin: 12px 0 16px 0;
+  flex-wrap: wrap;
+}
+
+.color-swatches-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-right: 4px;
+}
+
+.swatch-dot {
+  width: 34px; /* Bolinha de cor grande */
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.swatch-dot:hover {
+  transform: scale(1.15);
+}
+
+.swatch-dot.active {
+  transform: scale(1.22);
+  box-shadow: 0 0 0 3px var(--primary-color);
+}
+
+    /* Swatches de Cores */
+    .color-swatches-container {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .color-swatch {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .color-swatch:hover {
+      transform: scale(1.15);
+    }
+
+    .color-swatch.active {
+      transform: scale(1.25);
+      border: 2px solid var(--primary-color);
+      box-shadow: 0 0 0 2px var(--rosa-accent);
+    }
+
+    .about-section {
+      background: linear-gradient(135deg, #ffffff 0%, var(--rosa-soft) 100%);
+      border-radius: 28px;
+      border: 1px solid var(--border-color);
+      padding: 40px;
+      margin: 50px 0 30px 0;
+    }
+
+    .modal-content {
+      border-radius: 24px;
+      border: none;
+    }
+
+    /* RODAPÉ */
+    footer {
+      background-color: #ffffff;
+      border-top: 1px solid var(--border-color);
+      margin-top: auto;
+      padding: 40px 0 20px 0;
+    }
+
+    .footer-logo-container {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 2px solid var(--rosa-accent);
+      overflow: hidden;
+      background-color: var(--rosa-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .footer-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 8px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background-color: var(--rosa-soft);
+      color: var(--primary-color);
+      text-decoration: none;
+      margin-right: 8px;
+      transition: all 0.3s;
+    }
+
+    .social-btn:hover {
+      background-color: var(--rosa-accent);
+      color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 767.98px) {
+      .carousel-item-content {
+        padding: 30px 20px;
+        min-height: auto;
+      }
+      .hero-title {
+        font-size: 1.8rem;
+      }
+      .carousel-img-wrapper {
+        height: 260px;
+      }
+      .search-container {
+        max-width: 100%;
+        order: 3;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between flex-wrap">
+        <a href="#" class="brand-logo">
+          <div class="logo-container" id="headerLogoBox">
+            <img src="logo2.jpeg" alt="Crochê da Juh" class="logo-img" id="headerLogoImg">
+          </div>
+          <span class="brand-text">Crochê da Juh</span>
+        </a>
+
+        <div class="search-container mx-sm-2">
+          <i class="bi bi-search"></i>
+          <input type="text" id="searchInput" class="form-control search-input" placeholder="Buscar amigurumis, tapetes...">
+        </div>
+
+        <button class="btn cart-btn position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+          <i class="bi bi-bag fs-5"></i>
+          <span id="cartBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none; font-size: 0.65rem;">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container my-3">
+    <ul class="nav nav-pills nav-categories pb-1" id="categoryFilters">
+      <li class="nav-item"><a class="nav-link active" data-category="Todos">Todos os Produtos</a></li>
+      <li class="nav-item"><a class="nav-link" data-category="Amigurumis">Amigurumis</a></li>
+      <li class="nav-item"><a class="nav-link" data-category="Cozinha">Cozinha</a></li>
+      <li class="nav-item"><a class="nav-link" data-category="Banheiro">Banheiro</a></li>
+      <li class="nav-item"><a class="nav-link" data-category="Tapetes">Tapetes</a></li>
+      <li class="nav-item"><a class="nav-link" data-category="Tapetes">Chaveiros</a></li>
+
+
+    </ul>
+  </div>
+
+  <main class="container">
+    <div id="mainCarousel" class="carousel slide carousel-fade hero-carousel mb-5" data-bs-ride="carousel" data-bs-interval="3000">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="carousel-item-content">
+            <div class="row align-items-center w-100 g-4">
+              <div class="col-md-6 text-center text-md-start">
+                <span class="hero-tag">Decoração & Aconchego</span>
+                <h2 class="hero-title">Tapete Espiral Elegante</h2>
+                <p class="text-muted mb-4 fs-6">Design em espiral marcante em tom suave para transformar e aquecer sua sala ou quarto.</p>
+                <a href="#produtos" class="btn btn-rosa">Ver Detalhes</a>
+              </div>
+              <div class="col-md-6">
+                <div class="carousel-img-wrapper">
+                  <img src="..//sitemae/tapete-sala.jpg" alt="Tapete de Sala Espiral" onerror="this.onerror=null; this.src='tapete-sala-rosa.jpg'">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="carousel-item-content">
+            <div class="row align-items-center w-100 g-4">
+              <div class="col-md-6 text-center text-md-start">
+                <span class="hero-tag">Feito à Mão</span>
+                <h2 class="hero-title">Girafa Amigurumi</h2>
+                <p class="text-muted mb-4 fs-6">Criada ponto a ponto, perfeita para presentear com carinho e delicadeza.</p>
+                <a href="#produtos" class="btn btn-rosa">Conhecer Peça</a>
+              </div>
+              <div class="col-md-6">
+                <div class="carousel-img-wrapper">
+                  <img src="girafa.jpg" alt="Girafa Amigurumi">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="carousel-item-content">
+            <div class="row align-items-center w-100 g-4">
+              <div class="col-md-6 text-center text-md-start">
+                <span class="hero-tag">Jogo de Banheiro</span>
+                <h2 class="hero-title">Conjunto Corujas</h2>
+                <p class="text-muted mb-4 fs-6">Kit com 3 peças artesanais ricas em detalhes para deixar seu banheiro um charme só.</p>
+                <a href="#produtos" class="btn btn-rosa">Ver Conjunto</a>
+              </div>
+              <div class="col-md-6">
+                <div class="carousel-img-wrapper">
+                  <img src="banheiro-corujas.jpg" alt="Jogo Banheiro Corujas">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-indicators mb-3" style="position: relative; margin-top: -30px;">
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active" style="background-color: var(--primary-color); width: 10px; height: 10px; border-radius: 50%;"></button>
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1" style="background-color: var(--primary-color); width: 10px; height: 10px; border-radius: 50%;"></button>
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2" style="background-color: var(--primary-color); width: 10px; height: 10px; border-radius: 50%;"></button>
+      </div>
+    </div>
+
+    <section id="produtos" style="scroll-margin-top: 80px;">
+      <div class="d-flex justify-content-between align-items-baseline mb-4">
+        <h3 class="fw-bold m-0 fs-3">Catálogo de Peças</h3>
+        <span id="productCount" class="text-muted small">15 itens</span>
+      </div>
+
+      <div class="row g-3 g-md-4" id="productList"></div>
+    </section>
+
+    <div class="about-section">
+      <div class="row align-items-center text-center text-md-start">
+        <div class="col-md-8">
+          <h3 class="fw-bold mb-2 fs-3">Ateliê Crochê da Juh</h3>
+          <p class="text-muted mb-3 fs-6">
+            Cada peça é de altíssima qualidade e atenção aos mínimos detalhes. Faça seu pedido personalizado diretamente pelo WhatsApp!
+          </p>
+          <a href="https://wa.me/5555992098883" target="_blank" class="btn btn-rosa">
+            <i class="bi bi-whatsapp"></i> Fazer Encomenda
+          </a>
+        </div>
+        <div class="col-md-4 mt-4 mt-md-0 d-flex justify-content-center">
+          <img src="ovelha.jpg" alt="Ateliê Crochê da Juh" class="img-fluid rounded-circle" style="width: 140px; height: 140px; object-fit: cover; border: 4px solid #fff; box-shadow: 0 8px 20px rgba(248, 200, 212, 0.4);">
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="row g-4 mb-4">
+        <div class="col-md-5">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <div class="footer-logo-container" id="footerLogoBox">
+              <img src="logo2.jpeg" alt="Logo" class="logo-img" id="footerLogoImg">
+            </div>
+            <span class="brand-text fs-5">Crochê da Juh</span>
+          </div>
+          <p class="text-muted small pr-md-4">
+            Arte artesanal com carinho, elegância e foco em transformar a sua casa e momentos especiais.
+          </p>
+        </div>
+
+        <div class="col-6 col-md-3">
+          <h5 class="footer-title">Navegação</h5>
+          <ul class="footer-links">
+            <li><a href="#produtos">Todos os Produtos</a></li>
+            <li><a href="#mainCarousel">Destaques</a></li>
+            <li><a href="https://wa.me/5555992098883" target="_blank">Contato WhatsApp</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-4">
+          <h5 class="footer-title">Atendimento</h5>
+          <p class="text-muted small mb-2"><i class="bi bi-telephone me-2"></i>(55) 99209-8883</p>
+          <p class="text-muted small mb-3"><i class="bi bi-geo-alt me-2"></i>Ateliê Artesanal</p>
+          <div>
+            <a href="https://wa.me/5555992098883" target="_blank" class="social-btn"><i class="bi bi-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-top pt-3 text-center text-muted small">
+        &copy; 2026 Crochê da Juh - Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-bold fs-5" id="modalProductTitle">Detalhes da Peça</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <div class="mb-3 position-relative overflow-hidden rounded-4">
+            <img id="modalProductImg" src="" class="img-fluid rounded-4 shadow-sm" style="max-height: 250px; width: 100%; object-fit: cover;">
+          </div>
+          <p id="modalProductDesc" class="text-muted small px-2 mb-2"></p>
+          
+          <div id="colorSelectionBox" class="mt-3" style="display: none;">
+            <label class="fw-bold small mb-1 display-block" style="color: var(--primary-color);">Selecione a Cor Desejada:</label>
+            <div id="modalColorSwatches" class="color-swatches-container"></div>
+            <span id="selectedColorName" class="text-muted extra-small mt-2 d-block fw-semibold"></span>
+          </div>
+        </div>
+        <div class="modal-footer border-0 pt-0 d-flex justify-content-between align-items-center">
+          <span class="fw-bold fs-4" id="modalProductPrice" style="color: var(--primary-color);">R$ 0,00</span>
+          <button type="button" class="btn btn-rosa" id="btnConfirmAddToCart">Adicionar ao Carrinho</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" style="border-radius: 20px 0 0 20px;">
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title fw-bold fs-5"><i class="bi bi-bag me-2"></i> Meu Carrinho</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column p-3">
+      <div id="cartItemsList" class="flex-grow-1 overflow-auto"></div>
+      <div class="border-top pt-3 mt-2">
+        <div class="d-flex justify-content-between fw-bold fs-5 mb-3">
+          <span>Total:</span>
+          <span id="cartTotal" style="color: var(--primary-color);">R$ 0,00</span>
+        </div>
+        <button id="btnCheckout" class="btn btn-success w-100 py-3 fw-bold d-flex align-items-center justify-content-center gap-2 rounded-pill">
+          <i class="bi bi-whatsapp"></i> Finalizar no WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function setupLogoFallback(imgId, containerId) {
+      const img = document.getElementById(imgId);
+      const container = document.getElementById(containerId);
+      const possibleSources = ['logo2.jpeg', 'logo2.png', 'logo.jpeg', 'logo.jpg'];
+      let currentTry = 0;
+
+      img.onerror = function() {
+        currentTry++;
+        if (currentTry < possibleSources.length) {
+          img.src = possibleSources[currentTry];
+        } else {
+          container.innerHTML = '<span class="logo-fallback">CJ</span>';
+        }
+      };
+    }
+
+    setupLogoFallback('headerLogoImg', 'headerLogoBox');
+    setupLogoFallback('footerLogoImg', 'footerLogoBox');
+
+    const fallbackTapeteImg = 'https://images.unsplash.com/photo-1600121848594-d8644e57abab?q=80&w=800&auto=format&fit=crop';
+
+    const products = [
+      { id: 1, title: 'Girafa Amigurumi', category: 'Amigurumis', price: 100.00, img: 'girafa.jpg', description: 'Girafinha artesanal em crochê amigurumi com acabamento delicado em fios 100% algodão.' },
+      { id: 2, title: 'Polvo de Crochê Rosa', category: 'Amigurumis', price: 100.00, img: 'polvo-rosa.jpg', description: 'Polvinho fofo em tom rosa bebê com chupetinha, perfeito para recém-nascidos.' },
+      { id: 3, title: 'Polvo de Crochê Azul', category: 'Amigurumis', price: 100.00, img: 'polvo-azul.jpg', description: 'Polvinho suave azul bebê em crochê antialérgico.' },
+      { id: 4, title: 'Elefantinho Cinza', category: 'Amigurumis', price: 180.00, img: 'elefante.jpg', description: 'Elefante fofinho artesanal com toque macio para decoração do quarto.' },
+      { id: 5, title: 'Ovelhinha Amarela', category: 'Amigurumis', price: 200.00, img: 'ovelha.jpg', description: 'Ovelha graciosa com laço e detalhes delicados.' },
+      { id: 6, title: 'Papai Noel de Crochê', category: 'Amigurumis', price: 200.00, img: 'papai-noel.jpg', description: 'Amigurumi decorativo natalino feito com acabamento rico em detalhes.' },
+      { id: 7, title: 'Pug com Chupeta', category: 'Amigurumis', price: 200.00, img: 'pug.jpg', description: 'Cãozinho Pug artesanal em crochê preto com chupeta rosa, super carismático e fofo.' },
+      { 
+        id: 8, 
+        title: 'Tapete Redondo Espiral', 
+        category: 'Tapetes', 
+        price: 500.00, 
+        img: 'tapete-sala.jpg', 
+        description: 'Tapete versátil em formato espiral para destacar seu espaço com elegância.',
+        colors: [
+          { name: 'Padrão da foto', hex: '#FF7F7F', img: 'tapete-sala.jpg' },
+          { name: 'Rosa BB', hex: '#f8c8d4', img: 'tapete_rosa.png' },
+          { name: 'Azul Sereno', hex: '#b7d2e2', img: 'tapete_azul.png' },
+          { name: 'Mostarda Warm', hex: '#e2b04f', img: 'tapete_mostarda.png' },
+          { name: 'Verde Menta', hex: '#3EB489', img: 'tapete_verde.png' }
+        ]
+      },
+      { 
+        id: 9, 
+        title: 'Jogo Banheiro Corujas - 3 Peças', 
+        category: 'Banheiro', 
+        price: 180.00, 
+        img: 'banheiro-corujas.jpg', 
+        description: 'Jogo de banheiro completo com 3 peças temáticas artesanais.',
+        colors: [
+          { name: 'Multicolorido Padrão', hex: '#c59b6c', img: 'banheiro-corujas.jpg' },
+          { name: 'Rosa Soft', hex: '#e3b5ca', img: 'curuja_rosa.png' },
+          { name: 'Cinza & Branco', hex: '#b0b0b0', img: 'curuja_cinza.png' }
+        ]
+      },
+      { 
+        id: 10, 
+        title: 'Jogo Cozinha Oval Laranja - 3 Peças', 
+        category: 'Cozinha', 
+        price: 200.00, 
+        img: 'cozinha-laranja.jpg', 
+        description: 'Jogo de passadeiras ovas artesanais em tom laranja vibrante com acabamento em marrom.',
+        colors: [
+          { name: 'Padrão da foto', hex: '#FFDBBB', img: 'cozinha-laranja.jpg' },
+          { name: 'Rosa BB', hex: '#f8c8d4', img: 'laranja,rosa.png' },
+          { name: 'Azul Sereno', hex: '#b7d2e2', img: 'laranja,azul.png' },
+          { name: 'Mostarda Warm', hex: '#e2b04f', img: 'laranja,mostarda.png' },
+          { name: 'Verde Menta', hex: '#3EB489', img: 'laranja,verde.png' }
+        ]
+      },
+      { 
+        id: 11, 
+        title: 'Jogo Hexagonal - 3 Peças', 
+        category: 'Cozinha', 
+        price: 250.00, 
+        img: 'cozinha-hexagonal.jpg', 
+        description: 'Kit de passadeiras em tom neutro e formato hexagonal para cozinha.',
+        colors: [
+          { name: 'Padrão da foto', hex: '#FFDBBB', img: 'cozinha-hexagonal.jpg' },
+          { name: 'Bege Caqui', hex: '#d2b48c', img: 'bege.png' },
+          { name: 'Cinza Grafite', hex: '#63666a', img: 'cinza.png' },
+          { name: 'Azul Serenity', hex: '#91b3cd', img: 'azul.png' }
+        ]
+      },
+      { 
+        id: 12, 
+        title: 'Jogo Cozinha Floral - 3 Peças', 
+        category: 'Cozinha', 
+        price: 200.00, 
+        img: 'cozinha-vermelho.jpg', 
+        description: 'Conjunto de cozinha com aplicação de flores feitas à mão.',
+        colors: [
+          { name: 'Padrão da foto', hex: '#b82538', img: 'cozinha-vermelho.jpg' },
+          { name: 'Amarelo Girassol', hex: '#eec225', img: 'cozinha-amarelo.png' },
+          { name: 'Rosa Pink', hex: '#d85888', img: 'cozinha-rosa.png' }
+        ]
+      },
+      {
+       id: 13, 
+        title: 'Jogo Cozinha - 3 Peças', 
+        category: 'Cozinha', 
+        price: 200.00, 
+        img: 'cozinha3peca-studio.jpg', 
+        description: 'Conjunto de cozinha delicado feito à mão.',
+        colors: [
+          { name: 'Padrão da foto', hex: '#b82538', img: 'cozinha3peca-studio.jpg' },
+          { name: 'Laranja', hex: '#FFA500', img: 'cozinha-laranja.png' },
+          { name: 'Amarelo Girassol', hex: '#eec225', img: 'cozinha-amarelo.png' },
+          { name: 'Roxo', hex: '#A020F0', img: 'cozinha-roxo.png' }
+        ]
+      },
+      {
+       id: 14, 
+        title: 'chaveiros', 
+        category: 'chaveiros', 
+        price: 20.00, 
+        img: 'florchaveiro-studio.jpg', 
+        description: 'Chaveiro de chochê delicado feito à mão.',
+        colors: [
+          { name: 'Padrão da foto', hex: '#FF7F7F', img: 'florchaveiro-studio.jpg' },
+          { name: 'Laranja', hex: '#FFA500', img: 'flor-laranja.png' },
+          { name: 'Amarelo Girassol', hex: '#eec225', img: 'flor-rosa.png' },
+          { name: 'Rosa Pink', hex: '#d85888', img: 'flor-amarelo.png' }
+        ]
+      },
+      {
+       id: 15, 
+        title: 'chaveiros', 
+        category: 'chaveiros', 
+        price: 20.00, 
+        img: 'chaveiro-coracao-studio.jpg', 
+        description: 'Chaveiro de chochê delicado feito à mão.',
+        colors: [
+          { name: 'Padrão da foto', hex: '#d85888', img: 'chaveiro-coracao-studio.jpg' },
+          { name: 'Laranja', hex: '#FFA500', img: 'coracao-laranja.png' },
+          { name: 'Amarelo Girassol', hex: '#eec225', img: 'coracao-amarelo.png' },
+          { name: 'Roxo', hex: '#A020F0 ', img: 'coracao-roxo.png' }
+        ]
+      }
+    ];
+
+    let cart = [];
+    let selectedProduct = null;
+    let selectedColorName = null;
+    let selectedColorImg = null;
+
+    function renderProducts(items) {
+      const container = document.getElementById('productList');
+      container.innerHTML = '';
+
+      items.forEach(product => {
+        const col = document.createElement('div');
+        col.className = 'col-6 col-md-4 col-lg-3';
+        
+        let colorBadgeHtml = product.colors ? `<span class="badge bg-light text-dark border ms-1" style="font-size:0.65rem;">+${product.colors.length} cores</span>` : '';
+
+        col.innerHTML = `
+          <div class="product-card" onclick="openProductModal(${product.id})">
+            <div class="product-img-container">
+              <img src="${product.img}" alt="${product.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/200/f8c8d4/8c5260?text=Foto'">
+            </div>
+            <div class="d-flex align-items-center">
+              <span class="badge-category">${product.category}</span>
+              ${colorBadgeHtml}
+            </div>
+            <h4 class="product-title">${product.title}</h4>
+            <div class="d-flex justify-content-between align-items-center mt-auto pt-2">
+              <span class="product-price">R$ ${product.price.toFixed(2).replace('.', ',')}</span>
+              <button class="btn btn-add" onclick="event.stopPropagation(); openProductModal(${product.id})">
+                <i class="bi bi-plus-lg d-md-none"></i><span class="d-none d-md-inline">Ver mais</span>
+              </button>
+            </div>
+          </div>
+        `;
+        container.appendChild(col);
+      });
+
+      document.getElementById('productCount').innerText = `${items.length} peças`;
+    }
+
+    function scrollToProducts() {
+      const section = document.getElementById('produtos');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    const productModal = new bootstrap.Modal(document.getElementById('productModal'));
+
+    function openProductModal(id) {
+      selectedProduct = products.find(p => p.id === id);
+      if (!selectedProduct) return;
+
+      const modalImg = document.getElementById('modalProductImg');
+      document.getElementById('modalProductTitle').innerText = selectedProduct.title;
+      
+      modalImg.src = selectedProduct.img;
+      document.getElementById('modalProductDesc').innerText = selectedProduct.description;
+      document.getElementById('modalProductPrice').innerText = `R$ ${selectedProduct.price.toFixed(2).replace('.', ',')}`;
+
+      const colorBox = document.getElementById('colorSelectionBox');
+      const swatchesBox = document.getElementById('modalColorSwatches');
+      const colorNameText = document.getElementById('selectedColorName');
+
+      swatchesBox.innerHTML = '';
+      
+      if (selectedProduct.colors && selectedProduct.colors.length > 0) {
+        colorBox.style.display = 'block';
+        
+        selectedColorName = selectedProduct.colors[0].name;
+        selectedColorImg = selectedProduct.colors[0].img;
+        colorNameText.innerText = `Cor selecionada: ${selectedColorName}`;
+        modalImg.src = selectedColorImg;
+
+        selectedProduct.colors.forEach((c, index) => {
+          const swatch = document.createElement('div');
+          swatch.className = `color-swatch ${index === 0 ? 'active' : ''}`;
+          swatch.style.backgroundColor = c.hex;
+          swatch.title = c.name;
+
+          swatch.addEventListener('click', () => {
+            document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+            swatch.classList.add('active');
+            
+            selectedColorName = c.name;
+            selectedColorImg = c.img;
+            colorNameText.innerText = `Cor selecionada: ${selectedColorName}`;
+            modalImg.src = selectedColorImg;
+          });
+
+          swatchesBox.appendChild(swatch);
+        });
+      } else {
+        colorBox.style.display = 'none';
+        selectedColorName = null;
+        selectedColorImg = null;
+      }
+
+      productModal.show();
+    }
+
+    document.getElementById('btnConfirmAddToCart').addEventListener('click', () => {
+      if (!selectedProduct) return;
+      
+      cart.push({ 
+        ...selectedProduct, 
+        chosenColor: selectedColorName, 
+        img: selectedColorImg || selectedProduct.img,
+        cartId: Date.now() 
+      });
+      
+      updateCartUI();
+      productModal.hide();
+      new bootstrap.Offcanvas(document.getElementById('cartOffcanvas')).show();
+    });
+
+    function updateCartUI() {
+      const cartList = document.getElementById('cartItemsList');
+      const cartBadge = document.getElementById('cartBadge');
+      const cartTotal = document.getElementById('cartTotal');
+
+      cartBadge.style.display = cart.length > 0 ? 'inline-block' : 'none';
+      cartBadge.innerText = cart.length;
+
+      if (cart.length === 0) {
+        cartList.innerHTML = `<p class="text-center text-muted my-5 small">Seu carrinho está vazio.</p>`;
+        cartTotal.innerText = 'R$ 0,00';
+        return;
+      }
+
+      let total = 0;
+      cartList.innerHTML = '';
+
+      cart.forEach((item, index) => {
+        total += item.price;
+        const colorInfo = item.chosenColor ? `<span class="badge bg-secondary-subtle text-dark extra-small d-inline-block mt-1">Cor: ${item.chosenColor}</span>` : '';
+        const itemEl = document.createElement('div');
+        itemEl.className = 'd-flex align-items-center justify-content-between mb-3 border-bottom pb-2';
+        itemEl.innerHTML = `
+          <div class="d-flex align-items-center gap-3">
+            <img src="${item.img}" style="width: 48px; height: 48px; object-fit: cover; border-radius: 10px;">
+            <div>
+              <h6 class="m-0 fw-bold" style="font-size: 0.85rem;">${item.title}</h6>
+              ${colorInfo}
+              <div class="fw-bold" style="font-size: 0.85rem; color: var(--primary-color);">R$ ${item.price.toFixed(2).replace('.', ',')}</div>
+            </div>
+          </div>
+          <button class="btn btn-sm text-danger" onclick="removeFromCart(${index})"><i class="bi bi-trash fs-6"></i></button>
+        `;
+        cartList.appendChild(itemEl);
+      });
+
+      cartTotal.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartUI();
+    }
+
+    document.getElementById('btnCheckout').addEventListener('click', () => {
+      if (cart.length === 0) return;
+      let message = `Olá Juh! Gostaria de encomendar as seguintes peças:\n\n`;
+      let total = 0;
+      cart.forEach((item, index) => {
+        total += item.price;
+        const colorDetail = item.chosenColor ? ` (Cor: ${item.chosenColor})` : '';
+        message += `${index + 1}. *${item.title}*${colorDetail} - R$ ${item.price.toFixed(2).replace('.', ',')}\n`;
+      });
+      message += `\n*Total:* R$ ${total.toFixed(2).replace('.', ',')}`;
+      window.open(`https://wa.me/5555992098883?text=${encodeURIComponent(message)}`, '_blank');
+    });
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      renderProducts(products.filter(p => p.title.toLowerCase().includes(query) || p.description.toLowerCase().includes(query)));
+      if (query.trim().length > 0) {
+        scrollToProducts();
+      }
+    });
+
+    document.querySelectorAll('#categoryFilters .nav-link').forEach(button => {
+      button.addEventListener('click', (e) => {
+        document.querySelectorAll('#categoryFilters .nav-link').forEach(btn => btn.classList.remove('active'));
+        e.target.classList.add('active');
+
+        const cat = e.target.getAttribute('data-category');
+        renderProducts(cat === 'Todos' ? products : products.filter(p => p.category === cat));
+        scrollToProducts();
+      });
+    });
+
+    const carouselEl = document.querySelector('#mainCarousel');
+    const carousel = new bootstrap.Carousel(carouselEl, {
+      interval: 3000,
+      ride: 'carousel',
+      pause: false
+    });
+
+    renderProducts(products);
+  </script>
+</body>
+</html>
