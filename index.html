@@ -233,63 +233,64 @@
       object-fit: cover;
       display: block;
     }
-/* CONTAINER DA FOTO COM MÁXIMA VISIBILIDADE */
-.product-img-container {
-  width: 100%;
-  height: 340px; /* Foto grande e bem destacada */
-  background-color: var(--rosa-soft);
-  border-radius: 20px;
-  overflow: hidden;
-  margin-bottom: 16px;
-  position: relative;
-  box-shadow: inset 0 0 0 1px var(--border-color);
-}
 
-.product-img-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
+    /* CONTAINER DA FOTO COM MÁXIMA VISIBILIDADE */
+    .product-img-container {
+      width: 100%;
+      height: 340px;
+      background-color: var(--rosa-soft);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      position: relative;
+      box-shadow: inset 0 0 0 1px var(--border-color);
+    }
 
-/* ÁREA DE CORES EM DESTAQUE (MUITO MAIS VISÍVEL) */
-.color-swatches-card {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background-color: var(--rosa-soft);
-  padding: 10px 14px;
-  border-radius: 16px;
-  border: 1px solid var(--border-color);
-  margin: 12px 0 16px 0;
-  flex-wrap: wrap;
-}
+    .product-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
 
-.color-swatches-label {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  margin-right: 4px;
-}
+    /* ÁREA DE CORES EM DESTAQUE */
+    .color-swatches-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background-color: var(--rosa-soft);
+      padding: 10px 14px;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      margin: 12px 0 16px 0;
+      flex-wrap: wrap;
+    }
 
-.swatch-dot {
-  width: 34px; /* Bolinha de cor grande */
-  height: 34px;
-  border-radius: 50%;
-  border: 3px solid #ffffff;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
+    .color-swatches-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-right: 4px;
+    }
 
-.swatch-dot:hover {
-  transform: scale(1.15);
-}
+    .swatch-dot {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 3px solid #ffffff;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
 
-.swatch-dot.active {
-  transform: scale(1.22);
-  box-shadow: 0 0 0 3px var(--primary-color);
-}
+    .swatch-dot:hover {
+      transform: scale(1.15);
+    }
+
+    .swatch-dot.active {
+      transform: scale(1.22);
+      box-shadow: 0 0 0 3px var(--primary-color);
+    }
 
     /* Swatches de Cores */
     .color-swatches-container {
@@ -453,9 +454,7 @@
       <li class="nav-item"><a class="nav-link" data-category="Cozinha">Cozinha</a></li>
       <li class="nav-item"><a class="nav-link" data-category="Banheiro">Banheiro</a></li>
       <li class="nav-item"><a class="nav-link" data-category="Tapetes">Tapetes</a></li>
-      <li class="nav-item"><a class="nav-link" data-category="Tapetes">Chaveiros</a></li>
-
-
+      <li class="nav-item"><a class="nav-link" data-category="chaveiros">Chaveiros</a></li>
     </ul>
   </div>
 
@@ -473,7 +472,7 @@
               </div>
               <div class="col-md-6">
                 <div class="carousel-img-wrapper">
-                  <img src="..//sitemae/tapete-sala.jpg" alt="Tapete de Sala Espiral" onerror="this.onerror=null; this.src='tapete-sala-rosa.jpg'">
+                  <img src="tapete-sala.jpg" alt="Tapete de Sala Espiral" onerror="this.onerror=null; this.src='tapete-sala-rosa.jpg'">
                 </div>
               </div>
             </div>
@@ -740,7 +739,7 @@
         ]
       },
       {
-       id: 13, 
+        id: 13, 
         title: 'Jogo Cozinha - 3 Peças', 
         category: 'Cozinha', 
         price: 200.00, 
@@ -754,31 +753,31 @@
         ]
       },
       {
-       id: 14, 
-        title: 'chaveiros', 
+        id: 14, 
+        title: 'Chaveiro Flor', 
         category: 'chaveiros', 
         price: 20.00, 
         img: 'florchaveiro-studio.jpg', 
-        description: 'Chaveiro de chochê delicado feito à mão.',
+        description: 'Chaveiro de crochê delicado feito à mão em formato de flor.',
         colors: [
           { name: 'Padrão da foto', hex: '#FF7F7F', img: 'florchaveiro-studio.jpg' },
           { name: 'Laranja', hex: '#FFA500', img: 'flor-laranja.png' },
-          { name: 'Amarelo Girassol', hex: '#eec225', img: 'flor-rosa.png' },
-          { name: 'Rosa Pink', hex: '#d85888', img: 'flor-amarelo.png' }
+          { name: 'Rosa Soft', hex: '#d85888', img: 'flor-rosa.png' },
+          { name: 'Amarelo Girassol', hex: '#eec225', img: 'flor-amarelo.png' }
         ]
       },
       {
-       id: 15, 
-        title: 'chaveiros', 
+        id: 15, 
+        title: 'Chaveiro Coração', 
         category: 'chaveiros', 
         price: 20.00, 
         img: 'chaveiro-coracao-studio.jpg', 
-        description: 'Chaveiro de chochê delicado feito à mão.',
+        description: 'Chaveiro de crochê delicado feito à mão em formato de coração.',
         colors: [
           { name: 'Padrão da foto', hex: '#d85888', img: 'chaveiro-coracao-studio.jpg' },
           { name: 'Laranja', hex: '#FFA500', img: 'coracao-laranja.png' },
           { name: 'Amarelo Girassol', hex: '#eec225', img: 'coracao-amarelo.png' },
-          { name: 'Roxo', hex: '#A020F0 ', img: 'coracao-roxo.png' }
+          { name: 'Roxo', hex: '#A020F0', img: 'coracao-roxo.png' }
         ]
       }
     ];
